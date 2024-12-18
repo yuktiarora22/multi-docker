@@ -11,7 +11,7 @@ function App() {
         <header className="App-header">
           <h1 className="App-title">Fib calculator</h1>
           <Link to="/">Home</Link>
-          <Link to="/otherpage">Other Page</Link>
+          <Link to="/otherpage">Other Blank Page</Link>
         </header>
         <div>
           <Route exact path="/" component={Fib}></Route>
