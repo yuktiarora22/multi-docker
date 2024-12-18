@@ -19,6 +19,14 @@ jobs:
           docker build -t yuktiarora22/multi-nginx ././nginx
           docker build -t yuktiarora22/multi-server ././server
           docker build -t yuktiarora22/multi-worker ././worker
+
+      - name: Push images to Docker Hub
+        run: |
+          docker push yuktiarora22/multi-client
+          docker push yuktiarora22/multi-nginx
+          docker push yuktiarora22/multi-server
+          docker push yuktiarora22/multi-worker
+
      
       # - name: Generate deployment package
       #   run: zip -r deploy.zip . -x '*.git*'
