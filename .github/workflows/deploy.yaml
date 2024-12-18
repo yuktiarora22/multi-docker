@@ -1,4 +1,4 @@
-name: Deploy Frontend
+name: Deploy Multi Docker
 on:
   push:
     branches:
@@ -27,18 +27,17 @@ jobs:
           docker push yuktiarora22/multi-server
           docker push yuktiarora22/multi-worker
 
-     
-      # - name: Generate deployment package
-      #   run: zip -r deploy.zip . -x '*.git*'
-     
-      # - name: Deploy to EB
-      #   uses: einaregilsson/beanstalk-deploy@v21
-      #   with:
-      #     aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
-      #     aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
-      #     application_name: 'frontend'
-      #     environment_name: 'Frontend-env'
-      #     existing_bucket_name: 'elasticbeanstalk-ap-south-1-529088284858'
-      #     region: 'ap-south-1'
-      #     version_label: ${{ github.sha }}
-      #     deployment_package: deploy.zip
+      - name: Generate deployment package
+        run: zip deploy.zip docker-compose.yml
+
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v21
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+          application_name: 'multi-docker'
+          environment_name: 'Multi-docker-env-1'
+          existing_bucket_name: 'elasticbeanstalk-ap-south-1-529088284858'
+          region: 'ap-south-1'
+          version_label: ${{ github.sha }}
+          deployment_package: deploy.zip
